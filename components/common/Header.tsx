@@ -22,7 +22,7 @@ const HeaderComponent = ({ rightElements }: Props) => {
       </div>
       {rightElements && (
         <div className={styles.flexItem} /*style={{ marginRight: 10 }}*/>
-          {rightElements}{' '}
+          {rightElements}
         </div>
       )}
     </header>

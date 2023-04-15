@@ -1,15 +1,13 @@
 import { Fragment } from 'react';
-import Header from '../components/common/Header';
 import React from 'react';
 import Link from 'next/link';
 import styles from 'styles/header.module.scss';
 
+import Header from '../components/common/Header';
+import MapSection from '@components/home/MapSection';
+
 import { AiOutlineShareAlt } from 'react-icons/ai';
 import { VscFeedback } from 'react-icons/vsc';
-
-interface Props {
-  rightElements?: React.ReactElement[];
-}
 
 export default function Home() {
   return (
@@ -26,12 +24,19 @@ export default function Home() {
           >
             <AiOutlineShareAlt size={20} />
           </button>,
-          <Link href="/feedback" className={styles.box} key="link">
+          <Link
+            href="/feedback"
+            className={styles.box}
+            key="link"
+            style={{ marginRight: 15 }}
+          >
             <VscFeedback size={20} />
           </Link>,
         ]}
       />
-      <main></main>
+      <main style={{ width: '100%', height: '100%' }}>
+        <MapSection />
+      </main>
     </Fragment>
   );
 }
