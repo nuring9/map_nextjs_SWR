@@ -7,10 +7,15 @@ import { STORE_KEY } from '@hooks/useStores';
 import Marker from './Marker';
 import { ImageIcon, NaverMap } from 'types/map';
 import { Store } from 'types/store';
+import { CURRENT_STORE_KEY } from '@hooks/useCurrentStore';
+import useCurrentStore from '@hooks/useCurrentStore';
 
 const Markers = () => {
   const { data: map } = useSWR<NaverMap>(MAP_KEY); // MAP_KEY 키를 사용하여 전역상태인 map(네이버map객체)을 가져온다.
   const { data: stores } = useSWR<Store[]>(STORE_KEY); // STORE_KEY 키를 사용하여 전역상태인 stores(json파일)를 가져온다.
+
+  const { data: currentStore } = useSWR<Store>(CURRENT_STORE_KEY);
+  const { setCurrentStore, clearCurrentStore } = useCurrentStore();
 
   if (!map || !stores) return null;
   return (
@@ -21,10 +26,23 @@ const Markers = () => {
             map={map}
             coordinates={store.coordinates}
             key={store.nid}
-            icon={generateStoreMarkerIcon(store.season)} // generateStoreMarkerIcon 함수를 통해 적절한 아이콘을 얻는다.
+            icon={generateStoreMarkerIcon(store.season, false)} // generateStoreMarkerIcon 함수를 통해 적절한 아이콘을 얻는다.
+            onClick={() => {
+              setCurrentStore(store);
+            }}
           />
         );
       })}
+
+      {currentStore && (
+        <Marker
+          map={map}
+          coordinates={currentStore.coordinates}
+          icon={generateStoreMarkerIcon(currentStore.season, true)}
+          onClick={clearCurrentStore}
+          key={currentStore.nid}
+        />
+      )}
     </>
   );
 };
@@ -39,9 +57,12 @@ const SCALE = 2 / 3;
 const SCALED_MARKER_WIDTH = MARKER_WIDTH * SCALE;
 const SCALED_MARKER_HEIGHT = MARKER_HEIGHT * SCALE;
 
-export function generateStoreMarkerIcon(markerIndex: number): ImageIcon {
+export function generateStoreMarkerIcon(
+  markerIndex: number,
+  isSelected: boolean
+): ImageIcon {
   return {
-    url: 'images/markers.png', // 경로
+    url: isSelected ? 'images/markers-selected.png' : 'images/markers.png', // 경로
     size: new naver.maps.Size(SCALED_MARKER_WIDTH, SCALED_MARKER_HEIGHT), // 필요한 하나의 아이콘 사이즈
     origin: new naver.maps.Point(SCALED_MARKER_WIDTH * markerIndex, 0), // 스프라이트 이미지에서 몇번째 이미지를 사용할 것인지에 대한 옵션,좌표에 따라 잘라서 사용
     scaledSize: new naver.maps.Size( // 스프라이트 이미지의 전체크기를 원하는 사이즈로 리사이징 width, height
