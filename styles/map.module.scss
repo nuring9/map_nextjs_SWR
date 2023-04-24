@@ -1,0 +1,13 @@
+@use './detail.module';
+//@use를 사용하여 detail의 변수에 접근할 수 있다. scss에선 import를 사용하지않음.
+
+.map {
+  width: 100%;
+  height: 100%;
+
+  //naver logo control 위치 조정
+  & > div:nth-of-type(2) {
+    bottom: detail.$header-height + detail.$section-padding-top !important;
+    /* !important 를 사용하여 강제로 적용해야 함*/
+  }
+}

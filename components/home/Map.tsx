@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { Coordinates } from 'types/store';
 import { NaverMap } from 'types/map';
 import { INITIAL_CENTER, INITIAL_ZOOM } from '@hooks/useMap';
+import styles from 'styles/map.module.scss';
 
 type Props = {
   mapId?: string;
@@ -61,7 +62,7 @@ const Map = ({
         onReady={initializeMap} // 소스가(src)가 온전히 잘 load 되면 onLoad(또는 onReady)함수가 실행된다.
         // onLoad 사용 시 뒤로가기 했을 때 화면에 나타나지 않은 버그가 발생해 onReady 사용.
       />
-      <div id={mapId} style={{ width: '100%', height: '100%' }} />
+      <div id={mapId} className={styles.map} />
     </>
   );
 };

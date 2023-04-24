@@ -1,0 +1,50 @@
+$header-height: 60px; // $으로 변수 선언
+$section-padding-top: 8px;
+
+.detailSection {
+  position: absolute; // relative를 가진 부모요소를 기준으로 배치
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 101; // header보다 높게 +1
+
+  padding: $section-padding-top 16px 16px;
+  background-color: white;
+
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -2 8px 0 rgba(136, 136, 136, 0.3);
+
+  transform: translateY(
+    /* 하단에 배치하기 위해 translateY 사용. 
+    scss, calc 함수 안에서 변수 사용 방법 #{$변수명} */
+      calc(100% - #{$header-height} - #{$section-padding-top})
+  );
+}
+
+.header {
+  height: $header-height;
+
+  display: flex;
+  flex-direction: column; // 플렉스컨테이너 내의 아이템을 배치할 때, 글 여러 줄이 쌓이는 방향대로
+
+  .arrowButton {
+    height: 20px;
+    align-self: center;
+
+    border: none;
+    background-color: transparent;
+
+    &:disabled {
+      /*비활성 요소*/
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+  }
+  .title {
+    margin: 4px 0;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
