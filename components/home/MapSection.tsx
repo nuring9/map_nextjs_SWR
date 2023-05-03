@@ -14,7 +14,7 @@ const MapSection = () => {
    * router.asPath === '/?zoom={}&lat={}&lng={}'
    * https://developer.mozilla.org/ko/docs/Web/API/URLSearchParams
    */
-  const query = useMemo(() => new URLSearchParams(router.asPath.slice(1), [])); // eslint-disable-line react-hooks/exhaustive-deps
+  const query = useMemo(() => new URLSearchParams(router.asPath.slice(1)), []); // eslint-disable-line react-hooks/exhaustive-deps
   const initialZoom = useMemo(
     () => (query.get('zoom') ? Number(query.get('zoom')) : INITIAL_ZOOM),
     [query]
