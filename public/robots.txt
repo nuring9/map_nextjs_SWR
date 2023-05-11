@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://vercel.com/nuring9/map-nextjs/deployments
+Host: https://map-nextjs-alpha.vercel.app/
 
 # Sitemaps
-Sitemap: https://vercel.com/nuring9/map-nextjs/deployments/sitemap.xml
+Sitemap: https://map-nextjs-alpha.vercel.app/sitemap.xml

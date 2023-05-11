@@ -1,7 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl:
-    process.env.SITE_URL || 'https://vercel.com/nuring9/map-nextjs/deployments',
+  siteUrl: process.env.SITE_URL || 'https://map-nextjs-alpha.vercel.app/',
   generateRobotsTxt: true, // (optional)
   // ...other options
 };
