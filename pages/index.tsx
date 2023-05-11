@@ -48,10 +48,10 @@ export default Home;
 
 export async function getStaticProps() {
   /** TODO: next api routes로 불러오기. 아래와 같이 데이터를 로컬파일로 불러올 일은 없기때문. */
-  // const stores = await fetch(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/api/stores`
-  // ).then((res) => res.json());
-  const stores = (await import('../public/stores.json')).default;
+  const stores = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/stores`
+  ).then((res) => res.json());
+  // const stores = (await import('../public/stores.json')).default;
 
   return {
     props: { stores }, // await import한 데이터를 prop으로 넘겨줌. Home의 prop으로 받아진다.
